@@ -16,6 +16,15 @@
 # META           "id": "8ff6cf9e-ee2c-4ff7-882e-2d4155df7602"
 # META         }
 # META       ]
+# META     },
+# META     "warehouse": {
+# META       "default_warehouse": "ed772ca8-ff63-4a6c-b920-4b58d8409204",
+# META       "known_warehouses": [
+# META         {
+# META           "id": "ed772ca8-ff63-4a6c-b920-4b58d8409204",
+# META           "type": "Lakewarehouse"
+# META         }
+# META       ]
 # META     }
 # META   }
 # META }
@@ -97,7 +106,7 @@ vix_data = web.DataReader('VIXCLS', 'fred', start_date, end_date)
 
 # Combine data into a single DataFrame
 data = pd.concat([ff_rate, treasury_yield, long_term_treasury_yield, oil_prices, vix_data], axis=1)
-data.columns = ['Federal Funds Rate', '10-Year Treasury Yield', '20-Year Treasury Yield', 'Oil Prices', 'VIX']
+data.columns = ['Federal_Funds_Rate', '10-Year_Treasury_Yield', '20-Year_Treasury_Yield', 'Oil_Prices', 'VIX']
 
 # Save to CSV in Azure Fabric Lakehouse
 csv_path = 'abfss://Market_Data_Analysis@onelake.dfs.fabric.microsoft.com/Market_Analysis.Lakehouse/Files/Market/Bronze/Macroeconomic_Data.csv'
