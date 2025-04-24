@@ -8,13 +8,10 @@
 # META   },
 # META   "dependencies": {
 # META     "lakehouse": {
-# META       "default_lakehouse": "0add07fd-9b03-4609-9b2e-4a72fa2da714",
-# META       "default_lakehouse_name": "LakehouseTraining",
-# META       "default_lakehouse_workspace_id": "fe776b56-6de2-4daf-8e09-b5b2494d3cf7",
+# META       "default_lakehouse": "8ff6cf9e-ee2c-4ff7-882e-2d4155df7602",
+# META       "default_lakehouse_name": "Market_Analysis",
+# META       "default_lakehouse_workspace_id": "994aed12-db33-4876-9c93-59284bfb860b",
 # META       "known_lakehouses": [
-# META         {
-# META           "id": "0add07fd-9b03-4609-9b2e-4a72fa2da714"
-# META         },
 # META         {
 # META           "id": "8ff6cf9e-ee2c-4ff7-882e-2d4155df7602"
 # META         }
@@ -151,7 +148,7 @@ print(f"Saved new table: {table_name}")
 
 # CELL ********************
 
-df = spark.sql("SELECT * FROM LakehouseTraining.dbo.rolling_yearmonth_calendar_table \
+df = spark.sql("SELECT * FROM rolling_yearmonth_calendar_table \
 Where RollingYearMonth = 202012")
 display(df)
 

@@ -6,12 +6,74 @@
 # META   "kernel_info": {
 # META     "name": "synapse_pyspark"
 # META   },
-# META   "dependencies": {}
+# META   "dependencies": {
+# META     "lakehouse": {
+# META       "default_lakehouse": "0add07fd-9b03-4609-9b2e-4a72fa2da714",
+# META       "default_lakehouse_name": "LakehouseTraining",
+# META       "default_lakehouse_workspace_id": "fe776b56-6de2-4daf-8e09-b5b2494d3cf7"
+# META     }
+# META   }
 # META }
 
 # MARKDOWN ********************
 
 # Incremental Code
+
+# MARKDOWN ********************
+
+# **Apache Stream Example**
+
+# CELL ********************
+
+from pyspark.sql.functions import from_json, col
+from pyspark.sql.types import StructType, StructField, StringType, DoubleType, TimestampType
+import yfinance as yf
+
+# Define the schema for the incoming data
+schema = StructType([
+    StructField("symbol", StringType(), True),
+    StructField("price", DoubleType(), True),
+    StructField("timestamp", TimestampType(), True)
+])
+
+# Function to fetch real-time stock data
+def fetch_stock_data(symbols):
+    data = []
+    for symbol in symbols:
+        ticker = yf.Ticker(symbol)
+        price = ticker.history(period="1m")["Close"].iloc[-1]
+        timestamp = ticker.history(period="1m").index[-1]
+        data.append((symbol, price, timestamp))
+    return data
+
+# Create a streaming DataFrame
+def generate_streaming_data(spark):
+    symbols = ["AAPL", "GOOGL", "MSFT"]  # Add more symbols as needed
+    return spark.createDataFrame(fetch_stock_data(symbols), schema=schema)
+
+# Set up the streaming query
+stream_df = spark.readStream.format("rate").load()
+stream_df = stream_df.withColumn("value", generate_streaming_data(spark))
+
+# Write the streaming data to a Delta table
+query = (stream_df
+    .writeStream
+    .format("delta")
+    .outputMode("append")
+    .option("checkpointLocation", "/tmp/checkpoint")
+    .trigger(processingTime="10 seconds")
+    .start("/delta/stock_prices"))
+
+# Wait for the streaming query to terminate
+query.awaitTermination()
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
 
 # CELL ********************
 

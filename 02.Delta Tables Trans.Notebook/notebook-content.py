@@ -24,7 +24,7 @@
 abss_path = "abfss://Market_Data_Analysis@onelake.dfs.fabric.microsoft.com/Market_Analysis.Lakehouse/Files"
 
 # List of tickers (you can also dynamically list files in the directory)
-tickers = ['SPY', 'QQQ', 'TQQQ', 'UPRO', 'TMF']
+tickers = ['SPY', 'QQQ', 'TQQQ', 'UPRO', 'TMF','SSO','QLD']
 
 # METADATA ********************
 
@@ -113,7 +113,7 @@ for ticker in tickers:
 
 # MARKDOWN ********************
 
-# **03.Transfornation to Gold layer**
+# **03.Transfornation to Aggregated Tables**
 
 # CELL ********************
 

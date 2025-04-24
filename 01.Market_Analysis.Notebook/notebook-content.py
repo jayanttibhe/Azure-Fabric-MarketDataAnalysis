@@ -49,7 +49,7 @@ pip install pyspark yfinance pandas pandas_datareader
 import yfinance as yf
 import pandas as pd
 # Define an array of tickers
-tickers = ['SPY', 'QQQ', 'TQQQ', 'UPRO', 'TMF']
+tickers = ['SPY', 'QQQ', 'TQQQ', 'UPRO', 'TMF','SSO','QLD']
 
 # Loop through each ticker
 for ticker in tickers:
@@ -84,7 +84,7 @@ for ticker in tickers:
 import pandas as pd
 import pandas_datareader.data as web
 import datetime
-
+## Get Inflation Data
 # Define time range
 start_date = datetime.datetime(1990, 1, 1)
 end_date = datetime.datetime.now()
