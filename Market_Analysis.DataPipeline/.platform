@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "Market_Analysis"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e11f6934-c6df-95b2-4368-5c3943d790b0"
+  }
+}

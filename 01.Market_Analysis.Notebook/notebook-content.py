@@ -49,7 +49,7 @@ pip install pyspark yfinance pandas pandas_datareader
 import yfinance as yf
 import pandas as pd
 # Define an array of tickers
-tickers = ['SPY', 'QQQ', 'TQQQ', 'UPRO', 'TMF','SSO','QLD']
+tickers = ['SPY', 'QQQ', 'TQQQ', 'UPRO', 'TMF','SSO','QLD','SOXL']
 
 # Loop through each ticker
 for ticker in tickers:
